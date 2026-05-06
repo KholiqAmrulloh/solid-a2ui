@@ -9,10 +9,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./0.9": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./0.9/standard-catalog": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     }

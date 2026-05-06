@@ -6,8 +6,8 @@
  *
  * @example
  * ```tsx
- * import { standardCatalog } from '@a2ui-sdk/react/0.9/standard-catalog'
- * import { A2UIProvider, A2UIRenderer } from '@a2ui-sdk/react/0.9'
+ * import { standardCatalog } from '@a2ui-sdk/solid/0.9/standard-catalog'
+ * import { A2UIProvider, A2UIRenderer } from '@a2ui-sdk/solid/0.9'
  *
  * // Use standard catalog as-is
  * <A2UIProvider messages={messages} onAction={handleAction}>
@@ -84,7 +84,7 @@ export type CatalogFunctions = Record<string, unknown>;
  * Type for a catalog containing components and functions.
  */
 export interface Catalog {
-  /** Component registry mapping type names to React components */
+  /** Component registry mapping type names to Solid components */
   components: CatalogComponents;
   /** Function registry (reserved for future use) */
   functions: CatalogFunctions;

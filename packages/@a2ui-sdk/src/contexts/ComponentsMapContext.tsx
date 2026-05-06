@@ -49,7 +49,20 @@ export interface ComponentsMapProviderProps {
  */
 export function ComponentsMapProvider(props: ComponentsMapProviderProps) {
   const getComponent = (type: string): A2UIComponent | undefined => {
-    return hasOwn(props.components, type) ? props.components[type] : undefined;
+    if (!hasOwn(props.components, type)) return undefined;
+
+    const raw = props.components[type] as unknown;
+
+    // Normalize module namespace objects (common interop mistakes)
+    // e.g. someone may import a module with `import * as X from '...'` which
+    // results in an object like { default: Component } — handle that.
+    if (raw && typeof raw === "object") {
+      if ("default" in raw && typeof (raw as any).default === "function") {
+        return (raw as any).default as A2UIComponent;
+      }
+    }
+
+    return props.components[type];
   };
 
   const value: ComponentsMapContextValue = {

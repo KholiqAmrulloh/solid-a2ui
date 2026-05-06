@@ -8,7 +8,7 @@ import { useScopeBasePath } from "../../contexts/ScopeContext";
 import { For } from "solid-js";
 import { A2UIComponentProps } from "../types";
 import { cn } from "../../lib/utils";
-import { Checkbox } from "../ui/CheckBox";
+import { Checkbox } from "../ui/Checkbox";
 import { Label } from "../ui/Label";
 
 /**

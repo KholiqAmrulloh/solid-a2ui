@@ -8,8 +8,8 @@ import { useStringBinding, useFormBinding } from "../../hooks/useDataBinding";
 import { useValidation } from "../../hooks/useValidation";
 import { A2UIComponentProps } from "../types";
 import { cn } from "../../lib/utils";
-import { Label } from "../ui/Label";
-import { TextFieldInput, TextFieldTextArea } from "../ui/TextField";
+import { TextField, TextFieldInput, TextFieldTextArea } from "../ui/TextField";
+import { TextFieldLabel, TextFieldErrorMessage } from "../ui/TextField";
 
 /**
  * Maps variant to HTML input type.
@@ -79,8 +79,8 @@ export function TextFieldComponent(
   };
 
   return (
-    <div class={cn("flex flex-col gap-2")} style={style()}>
-      {labelText() && <Label for={id}>{labelText()}</Label>}
+    <TextField class={cn("flex flex-col gap-2")} style={style()}>
+      {labelText() && <TextFieldLabel for={id}>{labelText()}</TextFieldLabel>}
 
       {isLongText() ? (
         <TextFieldTextArea
@@ -106,11 +106,11 @@ export function TextFieldComponent(
 
       {validation().errors.length > 0 && (
         <div class="text-sm text-destructive">
-          {validation().errors.map((error, _index) => (
-            <p>{error}</p>
+          {validation().errors.map((error) => (
+            <TextFieldErrorMessage>{error}</TextFieldErrorMessage>
           ))}
         </div>
       )}
-    </div>
+    </TextField>
   );
 }

@@ -82,6 +82,20 @@ export function ComponentRenderer(props: ComponentRendererProps) {
   // Remove from rendering set after render
   renderingComponents.delete(renderKey);
 
+  // Diagnostic: log component kind when rendering to help debug runtime issues
+  // (kept minimal so production builds aren't noisy)
+  if (import.meta.env.DEV) {
+    try {
+      // eslint-disable-next-line no-console
+      console.debug("[A2UI] Rendering component", componentType, {
+        typeof: typeof ComponentImpl,
+        value: ComponentImpl,
+      });
+    } catch (e) {
+      // ignore
+    }
+  }
+
   return (
     <Dynamic
       component={ComponentImpl}

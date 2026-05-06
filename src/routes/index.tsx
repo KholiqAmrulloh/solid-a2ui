@@ -153,13 +153,13 @@ const profileMessages: A2UIMessage[] = [
 const listMessages: A2UIMessage[] = [
   {
     createSurface: {
-      surfaceId: "todo-list",
+      surfaceId: "todos",
       catalogId: "standard",
     },
   },
   {
     updateComponents: {
-      surfaceId: "todo-list",
+      surfaceId: "todos",
       components: [
         {
           id: "root",
@@ -191,6 +191,7 @@ const listMessages: A2UIMessage[] = [
         {
           id: "todo-checkbox",
           component: "CheckBox",
+          label: { path: "title" },
           value: { path: "done" }, // relative path dalam scope item
         },
         {
@@ -203,7 +204,7 @@ const listMessages: A2UIMessage[] = [
   },
   {
     updateDataModel: {
-      surfaceId: "todo-list",
+      surfaceId: "todos",
       path: "/",
       value: {
         todos: [

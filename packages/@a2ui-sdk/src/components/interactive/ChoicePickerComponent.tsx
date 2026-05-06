@@ -18,7 +18,7 @@ import { For } from "solid-js";
 import { A2UIComponentProps } from "../types";
 import { cn } from "../../lib/utils";
 import { Label } from "../ui/Label";
-import { Checkbox } from "../ui/CheckBox";
+import { Checkbox } from "../ui/Checkbox";
 
 /**
  * Helper component to resolve option labels.

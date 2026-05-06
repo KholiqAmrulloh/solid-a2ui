@@ -4,6 +4,7 @@
 import type { TextComponentProps } from "@a2ui-sdk/types/0.9/standard-catalog";
 import { useStringBinding } from "../../hooks/useDataBinding";
 import { JSX } from "solid-js";
+import { Dynamic } from "solid-js/web";
 import { cn } from "../../lib/utils";
 import { A2UIComponentProps } from "../types";
 
@@ -40,17 +41,21 @@ const variantElements: Record<string, keyof JSX.IntrinsicElements> = {
 export function TextComponent(props: A2UIComponentProps<TextComponentProps>) {
   const textValue = useStringBinding(props.surfaceId, props.text, "");
 
-  const className = cn(variantStyles[props.variant ?? "body"] || variantStyles);
-  const Element = (variantElements[props.variant ?? "body"] as "p") || "p";
+  const classKey = props.variant ?? "body";
+  const classNameValue = variantStyles[classKey] ?? variantStyles["body"];
+  const className = cn(classNameValue);
 
+  const elementTag =
+    (variantElements[classKey] as keyof JSX.IntrinsicElements | undefined) ??
+    ("p" as const);
   // Apply weight as flex-grow if set
   const style = () =>
     props.weight ? { "flex-grow": props.weight } : undefined;
 
   return (
-    <Element class={className} style={style()}>
+    <Dynamic component={elementTag} class={className} style={style()}>
       {textValue()}
-    </Element>
+    </Dynamic>
   );
 }
 

@@ -1,4 +1,4 @@
-import type { ValidComponent } from "solid-js";
+import type { JSX, ValidComponent } from "solid-js";
 import { mergeProps, splitProps } from "solid-js";
 
 import type { PolymorphicProps } from "@kobalte/core";
@@ -9,17 +9,23 @@ import { cn } from "../../lib/utils";
 type TextFieldRootProps<T extends ValidComponent = "div"> =
   TextFieldPrimitive.TextFieldRootProps<T> & {
     class?: string | undefined;
+    children?: JSX.Element;
   };
 
 const TextField = <T extends ValidComponent = "div">(
   props: PolymorphicProps<T, TextFieldRootProps<T>>,
 ) => {
-  const [local, others] = splitProps(props as TextFieldRootProps, ["class"]);
+  const [local, others] = splitProps(props as TextFieldRootProps, [
+    "class",
+    "children",
+  ]);
   return (
     <TextFieldPrimitive.Root
       class={cn("flex flex-col gap-1", local.class)}
       {...others}
-    />
+    >
+      {local.children}
+    </TextFieldPrimitive.Root>
   );
 };
 
